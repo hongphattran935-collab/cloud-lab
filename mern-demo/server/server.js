@@ -1,3 +1,4 @@
+global.crypto = require('crypto');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,7 +14,12 @@ app.use(express.json());
 // ===============================
 // KẾT NỐI MONGODB ATLAS
 // ===============================
-mongoose.connect(process.env.MONGODB_URI)
+// ===============================
+// KẾT NỐI MONGODB ATLAS
+// ===============================
+mongoose.connect(process.env.MONGODB_URI, {
+  family: 4 // Ép dùng IPv4, giúp tránh lỗi timeout trên Render
+})
   .then(() => {
     console.log("Da ket noi thanh cong den MongoDB Atlas!");
   })
