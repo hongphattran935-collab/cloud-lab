@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 function App() {
-  const API_URL = 'https://mern-backend-pvma.onrender.com/api/students';
+  const API_URL = 'https://mern-backend-app-lese.onrender.com/api/students';
 
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -195,7 +195,7 @@ function App() {
 
     try {
       const res = await fetch(
-        `https://mern-backend-pvma.onrender.com/api/students/${id}`,
+        `${API_URL}/${id}`,
         {
           method: 'DELETE'
         }
