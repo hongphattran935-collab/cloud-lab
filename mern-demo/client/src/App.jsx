@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [students, setStudents] = useState([]);
+  const API_URL = 'https://mern-backend-pvma.onrender.com/api/students';
 
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+
+  // Khai báo state form để quản lý dữ liệu nhập vào ô input
   const [form, setForm] = useState({
     studentId: '',
     name: '',
     email: ''
   });
 
-  const [loading, setLoading] = useState(false);
-
-  // ID sinh viên đang được sửa
-  const [editingId, setEditingId] = useState(null);
-
   // =========================
   // LẤY DANH SÁCH SINH VIÊN
   // =========================
   const fetchStudents = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/students');
+      const res = await fetch(API_URL);
 
       if (!res.ok) {
         throw new Error('Không thể tải danh sách sinh viên');
@@ -66,7 +66,7 @@ function App() {
       // =========================
       if (editingId) {
         const res = await fetch(
-          `http://localhost:5000/api/students/${editingId}`,
+          `${API_URL}/${editingId}`,
           {
             method: 'PUT',
             headers: {
@@ -109,7 +109,7 @@ function App() {
       // =========================
       else {
         const res = await fetch(
-          'http://localhost:5000/api/students',
+          API_URL,
           {
             method: 'POST',
             headers: {
@@ -195,7 +195,7 @@ function App() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/students/${id}`,
+        `https://mern-backend-pvma.onrender.com/api/students/${id}`,
         {
           method: 'DELETE'
         }
